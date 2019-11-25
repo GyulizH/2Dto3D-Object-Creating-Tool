@@ -7,19 +7,29 @@ lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[ 3 ] = new THREE.PointLight( 0xffffff, 5, 0 );
-lights[ 4 ] = new THREE.DirectionalLight( 0xffffff, 0.5 );
+lights[ 4 ] = new THREE.DirectionalLight( 0xffffff, 1 );
+lights[ 5 ] = new THREE.AmbientLight( 0xffffff, 0.8 );
+lights[ 6 ] = new THREE.AmbientLight( 0xffffff, 0.3 );
+lights[ 7 ] = new THREE.AmbientLight( 0xffffff, 0.3 );
+
 
 lights[ 0 ].position.set( 0, 300, 0 );
 lights[ 1 ].position.set( 100, 300, 500);
 lights[ 2 ].position.set( - 100, - 300, - 500);
 lights[ 3 ].position.set( 0, - 300, - 500 );
 lights[ 4 ].position.set( 0, - 95, - 800 );
+lights[ 5 ].position.set( 0, - 300, - 1000 );
+lights[ 6 ].position.set(  window.innerWidth/2,  window.innerHeight/2 , -1000 );
+lights[ 7].position.set( 100, 300, 500);
 
 scene.add( lights[ 0 ] );
 scene.add( lights[ 1 ] );
 scene.add( lights[ 2 ] );
-scene.add( lights[ 3] );
-scene.add( lights[ 4] );
+scene.add( lights[ 3 ] );
+scene.add( lights[ 4 ] );
+scene.add( lights[ 5 ] );
+scene.add( lights[ 6 ] );
+scene.add( lights[ 7 ] );
 
 
 var renderer = new THREE.WebGLRenderer();
@@ -27,6 +37,7 @@ scene3d.appendChild(renderer.domElement);
 renderer.setSize( window.innerWidth/2, window.innerHeight );
 camera.position.z = 800;
 camera.position.y = -95;
+//camera.lookAt(0, 0, 0);
 
 var material = new THREE.MeshPhongMaterial( { color: 0x156289, emissive: 0x072534, side: THREE.DoubleSide, flatShading: true } );
 var points = [];
@@ -34,15 +45,17 @@ for ( var i = 0; i < 10; i ++ ) {
 	points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
 }
 controls = new THREE.OrbitControls(camera,renderer.domElement)
-//var controls = new THREE.ObjectControls(camera, renderer.domElement, myMesh);
 addNewShape(points);
 
 var animate = function () {
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );
-	 shape.rotation.x += 0.01;
-	 shape.rotation.y += 0.05;
-	 //shape.rotation.z += 0.01;
+	//shape.rotation.x += 0.005;
+  shape.rotation.y += 0.005;
+  shape.rotation.z += 0.005;
+  shape.scale.x = 1;
+  shape.scale.y = 1;
+  shape.scale.z = 1;
 };
 animate();
 

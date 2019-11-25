@@ -1,17 +1,16 @@
 body { 
-  
+  margin: 0px;
 }
 
 canvas { 
+  display: inline-block;
   width: 49%; 
   height: 100%
-  float:left;
-  border:1px solid black; //to see where is my canvas
 }
 div{ 
-  width:49%; 
+  display: inline-block;
+  width: 49%;
   height: 100% 
-  float:right;
 }
 
 
