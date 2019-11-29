@@ -1,7 +1,8 @@
 var scene3d = document.getElementById("scene3d")
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+var camera = new THREE.PerspectiveCamera( 75, (window.innerWidth/2)/window.innerHeight, 0.1, 1000 );
 //var controls = new THREE.TrackballControls(camera)
+
 var lights = [];
 lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
 lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
@@ -34,36 +35,36 @@ scene.add( lights[ 7 ] );
 
 var renderer = new THREE.WebGLRenderer();
 scene3d.appendChild(renderer.domElement);
-renderer.setSize( window.innerWidth/2, window.innerHeight );
-camera.position.z = 800;
-camera.position.y = -95;
+renderer.setSize( window.innerWidth/2, window.innerHeight);
+camera.position.z = 450;
+camera.position.y = 0;
 //camera.lookAt(0, 0, 0);
 
 var material = new THREE.MeshPhongMaterial( { color: 0x156289, emissive: 0x072534, side: THREE.DoubleSide, flatShading: true } );
 var points = [];
 for ( var i = 0; i < 10; i ++ ) {
-	points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
+  points.push( new THREE.Vector2( Math.sin( i * 0.2 ) * 10 + 5, ( i - 5 ) * 2 ) );
 }
 controls = new THREE.OrbitControls(camera,renderer.domElement)
 addNewShape(points);
 
 var animate = function () {
-	requestAnimationFrame( animate );
-	renderer.render( scene, camera );
-	//shape.rotation.x += 0.005;
-  shape.rotation.y += 0.005;
-  shape.rotation.z += 0.005;
+  requestAnimationFrame( animate );
+  renderer.render( scene, camera );
+  //shape.rotation.x += 0.005;
+
+  if(rotateAni){
+    shape.rotation.y += 0.005;
+    shape.rotation.z += 0.005;
+  }
   shape.scale.x = 1;
   shape.scale.y = 1;
   shape.scale.z = 1;
 };
 animate();
 
-
-
-
 function generateGeometry(points){
-  var geometry = new THREE.LatheGeometry( points, 12,0, 2 * Math.PI );
+  var geometry = new THREE.LatheGeometry( points, 20,0, 2 * Math.PI );
   return geometry;
 }
 var shape;
